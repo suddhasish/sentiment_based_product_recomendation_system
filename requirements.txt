@@ -1,0 +1,13 @@
+Flask==2.3.2
+gunicorn
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+scikit-learn
+imbalanced-learn
+nltk
+beautifulsoup4
+IPython
+joblib

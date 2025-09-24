@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Recommendation System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        form { margin-bottom: 20px; }
+        input[type="text"] { padding: 8px; width: 250px; }
+        input[type="submit"] { padding: 8px 16px; background: #007BFF; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background: #0056b3; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 6px 0; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .score { color: #555; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>Product Recommendation System</h1>
+
+    <form method="POST">
+        <label for="username">Enter Username:</label>
+        <input type="text" id="username" name="username" value="{{ username|default('') }}">
+        <input type="submit" value="Get Recommendations">
+    </form>
+
+    {% if username %}
+        <h2>Recommendations for "{{ username }}"</h2>
+        {% if recommendations %}
+            <ul>
+            {% for r in recommendations %}
+                <li>
+                    {{ r.item }}
+                    {% if r.score is not none %}
+                        <span class="score">(Score: {{ '%.3f'|format(r.score) }})</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recommendations found. Showing popular items instead.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
